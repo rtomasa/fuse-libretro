@@ -403,6 +403,413 @@ keysyms_map_t keysyms_map[] = {
    { 0, 0 }    // End marker: DO NOT MOVE!
 };
 
+#define CORE_OPTION_VALUE_LIST_ENABLED_DISABLED \
+   { "enabled", NULL }, \
+   { "disabled", NULL }, \
+   { NULL, NULL }
+
+#define CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS \
+   { "<none>", NULL }, \
+   { "0", NULL }, \
+   { "1", NULL }, \
+   { "2", NULL }, \
+   { "3", NULL }, \
+   { "4", NULL }, \
+   { "5", NULL }, \
+   { "6", NULL }, \
+   { "7", NULL }, \
+   { "8", NULL }, \
+   { "9", NULL }, \
+   { "a", NULL }, \
+   { "b", NULL }, \
+   { "c", NULL }, \
+   { "d", NULL }, \
+   { "e", NULL }, \
+   { "f", NULL }, \
+   { "g", NULL }, \
+   { "h", NULL }, \
+   { "i", NULL }, \
+   { "j", NULL }, \
+   { "k", NULL }, \
+   { "l", NULL }, \
+   { "m", NULL }, \
+   { "n", NULL }, \
+   { "o", NULL }, \
+   { "p", NULL }, \
+   { "q", NULL }, \
+   { "r", NULL }, \
+   { "s", NULL }, \
+   { "t", NULL }, \
+   { "u", NULL }, \
+   { "v", NULL }, \
+   { "w", NULL }, \
+   { "x", NULL }, \
+   { "y", NULL }, \
+   { "z", NULL }, \
+   { "Enter", NULL }, \
+   { "Caps", NULL }, \
+   { "Symbol", NULL }, \
+   { "Space", NULL }, \
+   { NULL, NULL }
+
+static const struct retro_core_option_v2_category core_option_categories[] = {
+   { "system",   "System",   NULL },
+   { "video",    "Video",    NULL },
+   { "audio",    "Audio",    NULL },
+   { "input",    "Input",    NULL },
+   { "advanced", "Advanced", NULL },
+   { NULL, NULL, NULL },
+};
+
+static const struct retro_core_option_v2_definition core_option_definitions[] = {
+   {
+      "fuse_machine",
+      "Model (needs content load)",
+      NULL,
+      NULL,
+      NULL,
+      "system",
+      {
+         { "Spectrum 48K", NULL },
+         { "Spectrum 48K (NTSC)", NULL },
+         { "Spectrum 128K", NULL },
+         { "Spectrum +2", NULL },
+         { "Spectrum +2A", NULL },
+         { "Spectrum +3", NULL },
+         { "Spectrum +3e", NULL },
+         { "Spectrum SE", NULL },
+         { "Timex TC2048", NULL },
+         { "Timex TC2068", NULL },
+         { "Timex TS2068", NULL },
+         { "Spectrum 16K", NULL },
+         { "Pentagon 128K", NULL },
+         { "Pentagon 512K", NULL },
+         { "Pentagon 1024", NULL },
+         { "Scorpion 256K", NULL },
+         { NULL, NULL }
+      },
+      "Spectrum 48K"
+   },
+   {
+      "fuse_emulation_speed",
+      "Emulation speed percentage (needs content load)",
+      NULL,
+      NULL,
+      NULL,
+      "system",
+      {
+         { "50", NULL },
+         { "100", NULL },
+         { "150", NULL },
+         { "200", NULL },
+         { "300", NULL },
+         { NULL, NULL }
+      },
+      "100"
+   },
+   {
+      "fuse_size_border",
+      "Size Video Border",
+      NULL,
+      NULL,
+      NULL,
+      "video",
+      {
+         { "full", NULL },
+         { "medium", NULL },
+         { "small", NULL },
+         { "minimum", NULL },
+         { "none", NULL },
+         { NULL, NULL }
+      },
+      "full"
+   },
+   {
+      "fuse_palette",
+      "Colour Palette",
+      NULL,
+      NULL,
+      NULL,
+      "video",
+      {
+         { "Fuse Standard", NULL },
+         { "ZX Standard", NULL },
+         { "B&W TV", NULL },
+         { "Green Monochrome", NULL },
+         { "Ambar Monochrome", NULL },
+         { "C64", NULL },
+         { "CGA 4 colours", NULL },
+         { "CGA 8 colours", NULL },
+         { "CGA 16 colours", NULL },
+         { "Inverted colours", NULL },
+         { NULL, NULL }
+      },
+      "Fuse Standard"
+   },
+   {
+      "fuse_auto_load",
+      "Tape Auto Load",
+      NULL,
+      NULL,
+      NULL,
+      "system",
+      { CORE_OPTION_VALUE_LIST_ENABLED_DISABLED },
+      "enabled"
+   },
+   {
+      "fuse_fast_load",
+      "Tape Fast Load",
+      NULL,
+      NULL,
+      NULL,
+      "advanced",
+      { CORE_OPTION_VALUE_LIST_ENABLED_DISABLED },
+      "enabled"
+   },
+   {
+      "fuse_load_sound",
+      "Tape Load Sound",
+      NULL,
+      NULL,
+      NULL,
+      "audio",
+      { CORE_OPTION_VALUE_LIST_ENABLED_DISABLED },
+      "enabled"
+   },
+   {
+      "fuse_speaker_type",
+      "Speaker Type",
+      NULL,
+      NULL,
+      NULL,
+      "audio",
+      {
+         { "tv speaker", NULL },
+         { "beeper", NULL },
+         { "unfiltered", NULL },
+         { NULL, NULL }
+      },
+      "tv speaker"
+   },
+   {
+      "fuse_ay_stereo_separation",
+      "AY Stereo Separation",
+      NULL,
+      NULL,
+      NULL,
+      "audio",
+      {
+         { "none", NULL },
+         { "acb", NULL },
+         { "abc", NULL },
+         { NULL, NULL }
+      },
+      "none"
+   },
+   {
+      "fuse_key_ovrlay_transp",
+      "Transparent Keyboard Overlay",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_ENABLED_DISABLED },
+      "enabled"
+   },
+   {
+      "fuse_key_hold_time",
+      "Time to Release Key in ms",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      {
+         { "100", NULL },
+         { "300", NULL },
+         { "500", NULL },
+         { "1000", NULL },
+         { NULL, NULL }
+      },
+      "500"
+   },
+   {
+      "fuse_display_joystick_type",
+      "Display joystick type and emulation speed at startup",
+      NULL,
+      NULL,
+      NULL,
+      "advanced",
+      { CORE_OPTION_VALUE_LIST_ENABLED_DISABLED },
+      "enabled"
+   },
+   {
+      "fuse_auto_size_savestate",
+      "Use Auto Size for Savestates. For Netplay 'Off' is recommended",
+      NULL,
+      NULL,
+      NULL,
+      "advanced",
+      { CORE_OPTION_VALUE_LIST_ENABLED_DISABLED },
+      "enabled"
+   },
+   {
+      "fuse_joypad_left",
+      "Joypad Left mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_right",
+      "Joypad Right mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_up",
+      "Joypad Up mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_down",
+      "Joypad Down mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_start",
+      "Joypad Start mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_a",
+      "Joypad A button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_b",
+      "Joypad B button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_x",
+      "Joypad X button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_y",
+      "Joypad Y button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_l",
+      "Joypad L button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_r",
+      "Joypad R button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_l2",
+      "Joypad L2 button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_r2",
+      "Joypad R2 button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_l3",
+      "Joypad L3 button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   {
+      "fuse_joypad_r3",
+      "Joypad R3 button mapping",
+      NULL,
+      NULL,
+      NULL,
+      "input",
+      { CORE_OPTION_VALUE_LIST_SPECTRUM_KEYS },
+      "<none>"
+   },
+   { NULL, NULL, NULL, NULL, NULL, NULL, { { NULL, NULL } }, NULL },
+};
+
+static const struct retro_core_options_v2 core_options_v2 = {
+   core_option_categories,
+   core_option_definitions
+};
+
 static const struct retro_variable core_vars[] =
 {
    { "fuse_machine", "Model (needs content load); Spectrum 48K|Spectrum 48K (NTSC)|Spectrum 128K|Spectrum +2|Spectrum +2A|Spectrum +3|Spectrum +3e|Spectrum SE|Timex TC2048|Timex TC2068|Timex TS2068|Spectrum 16K|Pentagon 128K|Pentagon 512K|Pentagon 1024|Scorpion 256K" },
@@ -770,9 +1177,19 @@ void retro_set_environment(retro_environment_t cb)
    };
 
    bool yes = true;
+   unsigned core_options_version = 0;
    cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &yes);
 
-   cb(RETRO_ENVIRONMENT_SET_VARIABLES, (void*)core_vars);
+   if (cb(RETRO_ENVIRONMENT_GET_CORE_OPTIONS_VERSION, &core_options_version) &&
+       core_options_version >= 2)
+   {
+      cb(RETRO_ENVIRONMENT_SET_CORE_OPTIONS_V2, (void*)&core_options_v2);
+   }
+   else
+   {
+      cb(RETRO_ENVIRONMENT_SET_VARIABLES, (void*)core_vars);
+   }
+
    cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
 }
 
